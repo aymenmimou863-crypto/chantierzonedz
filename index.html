@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ChantierZone DZ — تقارير الورشة بصوتك، ومخزونك تحت المراقبة</title>
+<meta name="description" content="منصة جزائرية لتسيير ورشات البناء: تقرير يومي من رسالة صوتية بالدارجة، استلام المواد والمخزون، المصاريف والوثائق. سجّل في قائمة الانتظار.">
+<meta name="theme-color" content="#1d4e89">
+<meta property="og:title" content="ChantierZone DZ — تسيير الورشات بالصوت والذكاء الاصطناعي">
+<meta property="og:description" content="قل ما حدث في الورشة بصوتك، والتقرير يُحضَّر للمراجعة. نسخة تجريبية قيد التطوير.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27><rect width=%27100%27 height=%27100%27 rx=%2718%27 fill=%27%231d4e89%27/><path d=%27M20 70h60M30 70V40l20-14 20 14v30%27 stroke=%27%23f5c400%27 stroke-width=%278%27 fill=%27none%27/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--blue:#1d4e89;--deep:#0e2a47;--yellow:#f5c400;--concrete:#e8e6e1;--paper:#f7f6f3;--ink:#1c2127;--mute:#5b6570;--line:#cfcbc3;--ok:#1f7a4d}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:'Cairo',Tahoma,'Segoe UI',Arial,sans-serif;background:var(--paper);color:var(--ink);line-height:1.8;font-size:17px}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--yellow);outline-offset:3px}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+header{background:var(--deep);color:#fff}
+.bar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 0}
+.logo{font-weight:800;font-size:20px;text-decoration:none}
+.logo i{font-style:normal;color:var(--yellow)}
+.bar nav{display:flex;gap:18px;font-size:15px}
+.bar nav a{text-decoration:none;color:#cfdcea}
+.bar nav a:hover{color:#fff}
+.btn{display:inline-block;background:var(--yellow);color:#1c1500;font:800 17px/1 'Cairo',Tahoma,sans-serif;padding:14px 22px;border:0;border-radius:6px;cursor:pointer;text-decoration:none}
+.btn:hover{background:#ffd633}
+.btn.ghost{background:transparent;color:#fff;border:2px solid #4c7099}
+.hero{background:var(--deep);color:#fff;padding:34px 0 64px;border-bottom:8px solid var(--yellow)}
+.hero .wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:36px;align-items:center}
+.tag{display:inline-block;background:#173a5f;color:var(--yellow);padding:2px 12px;border-radius:99px;font-size:14px;font-weight:600}
+h1{font-size:clamp(30px,5vw,50px);line-height:1.3;margin:14px 0;font-weight:800}
+.lead{color:#cfdcea;font-size:19px;max-width:34em}
+.cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:24px}
+.demo{background:var(--paper);color:var(--ink);border-radius:10px;padding:18px;box-shadow:0 0 0 1px #0006}
+.voice{display:flex;align-items:center;gap:12px;background:#dcf3e4;border-radius:10px;padding:12px 14px}
+.play{flex:none;width:42px;height:42px;border-radius:50%;border:0;background:var(--ok);color:#fff;font-size:16px;cursor:pointer}
+.wave{display:flex;align-items:center;gap:3px;height:34px;flex:1}
+.wave b{display:block;width:3px;background:var(--ok);border-radius:2px;opacity:.7}
+.say{font-size:15px;margin:10px 2px 14px;color:#243;}
+.rep{border:1px solid var(--line);border-radius:8px;background:#fff}
+.rep h3{margin:0;padding:8px 14px;font-size:15px;background:var(--concrete);border-radius:8px 8px 0 0}
+.row{display:flex;justify-content:space-between;gap:10px;padding:8px 14px;border-top:1px solid #eee;font-size:15px;opacity:0;transform:translateY(4px);transition:.3s}
+.row.on{opacity:1;transform:none}
+.row span:first-child{color:var(--mute)}
+.row .na{color:#a15c00}
+.note{font-size:13px;color:var(--mute);margin:10px 2px 0}
+section{padding:60px 0}
+section.alt{background:var(--concrete)}
+h2{font-size:clamp(24px,3.6vw,34px);line-height:1.35;margin:0 0 10px;font-weight:800;color:var(--deep)}
+.sub{color:var(--mute);max-width:40em;margin:0 0 28px}
+.pain{columns:2;column-gap:36px;padding:0;list-style:none;margin:0}
+.pain li{break-inside:avoid;padding:10px 16px 10px 0;border-right:4px solid var(--yellow);margin-bottom:14px;padding-right:14px}
+.feat{display:grid;grid-template-columns:repeat(2,1fr);gap:0 40px}
+.feat div{padding:16px 0;border-top:2px solid var(--deep)}
+.feat h3{margin:0 0 4px;font-size:19px}
+.feat p{margin:0;color:var(--mute);font-size:16px}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;counter-reset:s;padding:0;list-style:none;margin:0}
+.steps li{counter-increment:s;background:#fff;border:1px solid var(--line);border-radius:8px;padding:18px}
+.steps li::before{content:counter(s);display:grid;place-items:center;width:34px;height:34px;background:var(--blue);color:#fff;border-radius:50%;font-weight:800;margin-bottom:8px}
+.steps b{display:block;font-size:18px}
+.plans{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.plan{border:2px solid var(--line);border-radius:8px;padding:20px;background:#fff}
+.plan.main{border-color:var(--blue)}
+.plan h3{margin:0;font-size:20px}
+.price{font-size:30px;font-weight:800;color:var(--blue);margin:6px 0}
+.price small{font-size:14px;color:var(--mute);font-weight:400}
+.plan ul{padding:0 18px 0 0;margin:10px 0 0;font-size:15.5px;color:#2d3640}
+details{border-top:1px solid var(--line);padding:14px 0}
+details:last-of-type{border-bottom:1px solid var(--line)}
+summary{cursor:pointer;font-weight:600;font-size:18px}
+details p{margin:8px 0 0;color:var(--mute)}
+.join{background:var(--blue);color:#fff}
+.join h2{color:#fff}
+.join .sub{color:#d6e4f3}
+form{display:grid;grid-template-columns:1fr 1fr;gap:14px;max-width:760px}
+label{display:block;font-size:15px;font-weight:600;margin-bottom:4px}
+input,select{width:100%;padding:12px;border:2px solid #fff0;border-radius:6px;font:inherit;background:#fff;color:var(--ink)}
+.full{grid-column:1/-1}
+#st{min-height:1.6em;font-size:15px;color:#ffe9a0}
+footer{background:var(--deep);color:#a9bbd0;padding:26px 0;font-size:14px}
+@media(max-width:820px){.hero .wrap,.feat,.steps,.plans,form{grid-template-columns:1fr}.pain{columns:1}.bar nav{display:none}section{padding:44px 0}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.row{transition:none}}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap bar">
+    <a class="logo" href="#top">Chantier<i>Zone</i> DZ</a>
+    <nav aria-label="الأقسام"><a href="#features">الخصائص</a><a href="#how">كيف تعمل</a><a href="#pricing">الأسعار</a><a href="#faq">أسئلة</a></nav>
+    <a class="btn" href="#join">سجّل في قائمة الانتظار</a>
+  </div>
+</header>
+
+<main id="top">
+<div class="hero"><div class="wrap">
+  <div>
+    <span class="tag">نسخة تجريبية قيد التطوير</span>
+    <h1>قل ما حدث في الورشة بصوتك، والتقرير يُحضَّر لك للمراجعة</h1>
+    <p class="lead">منصة جزائرية لتسيير ورشات البناء: تقرير يومي من رسالة صوتية بالدارجة، استلام المواد ومراقبة المخزون، مصاريف ووثائق في مكان واحد. تعمل على الهاتف والويب.</p>
+    <div class="cta"><a class="btn" href="#join">سجّل في قائمة الانتظار</a><a class="btn ghost" href="#how">شاهد كيف تعمل</a></div>
+  </div>
+  <div class="demo" aria-label="مثال توضيحي">
+    <div class="voice">
+      <button class="play" id="play" aria-label="شغّل المثال">▶</button>
+      <div class="wave" aria-hidden="true"></div><span style="font-size:14px">0:14</span>
+    </div>
+    <p class="say">«اليوم صبّينا خرسانة الدالة، كانو حاضرين ستة عمال، وما زال ناقصنا جزء من الحديد باش نكملو الخدمة.»</p>
+    <div class="rep" id="rep">
+      <h3>تقرير يومي — مسودة للمراجعة</h3>
+      <div class="row"><span>الأشغال المنجزة</span><span>صب خرسانة الدالة</span></div>
+      <div class="row"><span>العمال المصرح بحضورهم</span><span>6</span></div>
+      <div class="row"><span>الكميات</span><span class="na">لم تُذكر، تبقى فارغة</span></div>
+      <div class="row"><span>الاحتياج</span><span>جزء من حديد التسليح</span></div>
+      <div class="row"><span>الحالة</span><span class="na">بانتظار مصادقتك</span></div>
+    </div>
+    <p class="note">مثال توضيحي. لا يُسجَّل أي شيء قبل أن تراجعه وتصادق عليه.</p>
+  </div>
+</div></div>
+
+<section>
+  <div class="wrap">
+    <h2>مشاكل تعرفها جيدًا</h2>
+    <p class="sub">المعلومة تضيع بين الدفاتر والواتساب والوصولات. وهذا ما نريد إصلاحه.</p>
+    <ul class="pain">
+      <li>تقارير يومية ناقصة أو تصل متأخرة.</li>
+      <li>فرق بين الكمية المطلوبة والمستلمة، ولا أحد يعرف أين.</li>
+      <li>وصولات التسليم والفواتير مبعثرة.</li>
+      <li>الميزانية تُتجاوز قبل أن ينتبه أحد.</li>
+      <li>صعوبة معرفة التقدم الحقيقي للأشغال.</li>
+      <li>المخططات والنسخ القديمة والجديدة مختلطة.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="alt" id="features">
+  <div class="wrap">
+    <h2>ما الذي ستجده داخل المنصة</h2>
+    <p class="sub">ركّزنا على ما يحتاجه رئيس الورشة ومسيّر الأشغال والمقاول كل يوم.</p>
+    <div class="feat">
+      <div><h3>تقرير يومي بالصوت</h3><p>رسالة بالدارجة أو العربية أو الفرنسية، مع صورة. تُعرض المعلومات للمراجعة قبل التسجيل.</p></div>
+      <div><h3>استلام المواد والمخزون</h3><p>طلبيات، سندات استلام، فروقات وحركات مخزون، وتنبيه عند بلوغ الحد الأدنى.</p></div>
+      <div><h3>مصاريف وميزانية</h3><p>مقارنة الميزانية بالمصاريف، مع المستند الإثباتي لكل عملية وتنبيه عند توقع التجاوز.</p></div>
+      <div><h3>مهام وحوادث وقرارات</h3><p>من المسؤول؟ ما الأولوية؟ ما المتأخر؟ كل شيء له سجل.</p></div>
+      <div><h3>وثائق ونسخها</h3><p>مخططات وعقود وفواتير ومحاضر، مع بحث وتاريخ النسخ.</p></div>
+      <div><h3>عمل دون إنترنت</h3><p>سجّل في الورشة، وتتم المزامنة عند عودة الاتصال، مع تحذيرك من أي تعارض.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="how">
+  <div class="wrap">
+    <h2>كيف تعمل</h2>
+    <p class="sub">ثلاث خطوات، وأنت صاحب القرار في كل واحدة.</p>
+    <ol class="steps">
+      <li><b>سجّل</b>رسالة صوتية قصيرة وصورة من الورشة، حتى لو كنت واقفًا وسط الغبار.</li>
+      <li><b>راجع</b>يُحضَّر التقرير ويُعلَّم ما هو غير مؤكد. لا يخترع النظام كميات لم تذكرها.</li>
+      <li><b>صادق</b>يُسجَّل اسمك ووقت المصادقة، ويُحفظ كل تعديل في السجل.</li>
+    </ol>
+  </div>
+</section>
+
+<section class="alt" id="pricing">
+  <div class="wrap">
+    <h2>أسعار مبدئية</h2>
+    <p class="sub">أسعار تجريبية قابلة للتغيير قبل الإطلاق، بالدينار وبدون الرسم على القيمة المضافة. أوائل المسجَّلين يشاركون في تحديدها.</p>
+    <div class="plans">
+      <div class="plan"><h3>Starter</h3><div class="price">مجاني</div><ul><li>ورشة واحدة صغيرة</li><li>التقارير اليومية</li><li>حصة محدودة من الذكاء الاصطناعي</li></ul></div>
+      <div class="plan main"><h3>Chantier</h3><div class="price">4,500 دج <small>/ ورشة / شهر</small></div><ul><li>تقارير بالصوت والصورة</li><li>مواد ومخزون ومهام</li><li>مصاريف ووثائق</li><li>العمل دون إنترنت</li></ul></div>
+      <div class="plan"><h3>Entreprise</h3><div class="price">من 15,000 دج <small>/ شهر</small></div><ul><li>عدة ورشات ومسؤولين</li><li>لوحة قيادة للمقاول</li><li>صلاحيات وسجل تدقيق</li><li>تصدير PDF وCSV</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap">
+    <h2>أسئلة شائعة</h2>
+    <details><summary>هل التطبيق جاهز الآن؟</summary><p>لا. المنصة قيد التطوير، والتسجيل يمنحك مكانًا في التجربة الميدانية الأولى.</p></details>
+    <details><summary>هل يحل الذكاء الاصطناعي محل المهندس أو مسؤول السلامة؟</summary><p>لا. يحضّر المعلومات وينبّه إلى التناقضات فقط. القرارات الإنشائية والسلامة تبقى بيد المختصين المؤهلين.</p></details>
+    <details><summary>من يرى بياناتي؟</summary><p>كل مستخدم يرى فقط ما تمنحه له من صلاحيات داخل مؤسستك وورشتك. وتعرف ما يُجمع وأين يُخزَّن ومدة الاحتفاظ به.</p></details>
+    <details><summary>هل يعمل في الأماكن الضعيفة التغطية؟</summary><p>الهدف أن تعمل الوظائف الأساسية دون إنترنت وتتم المزامنة لاحقًا. سنختبر ذلك في ورشات حقيقية قبل الإطلاق.</p></details>
+    <details><summary>هل أحتاج بطاقة CIB للاشتراك؟</summary><p>نعمل على وسائل دفع تناسب السوق المحلي، منها التحويل البنكي والفوترة. ستعرف التفاصيل قبل أي اشتراك.</p></details>
+  </div>
+</section>
+
+<section class="join" id="join">
+  <div class="wrap">
+    <h2>كن من أوائل من يجرّبها</h2>
+    <p class="sub">املأ البيانات وسنفتح لك محادثة واتساب جاهزة. لا ننشر معلوماتك ولا نبيعها.</p>
+    <form id="f" novalidate>
+      <div><label for="n">الاسم</label><input id="n" autocomplete="name" required></div>
+      <div><label for="p">رقم الهاتف</label><input id="p" type="tel" inputmode="tel" autocomplete="tel" required></div>
+      <div><label for="r">صفتك</label><select id="r"><option>مقاول</option><option>مسيّر أشغال</option><option>رئيس ورشة</option><option>مهندس / مكتب دراسات</option><option>أمين مخزن / محاسب</option><option>أخرى</option></select></div>
+      <div><label for="w">الولاية</label><input id="w" placeholder="مثال: وهران"></div>
+      <div class="full"><label for="s">عدد الورشات النشطة حاليًا</label><input id="s" type="number" min="0" inputmode="numeric"></div>
+      <div class="full"><button class="btn" type="submit">أرسل طلبي عبر واتساب</button></div>
+      <div class="full" id="st" role="status"></div>
+    </form>
+  </div>
+</section>
+</main>
+
+<footer><div class="wrap">ChantierZone DZ — مشروع قيد التطوير. المحتوى والأسعار تعريفية ولا تمثل التزامًا نهائيًا. © <span id="y"></span></div></footer>
+
+<script>
+/* غيّر الرقم إلى رقمك بالصيغة الدولية بدون + ولا أصفار، مثال: 213550123456 */
+var WHATSAPP = "213000000000";
+
+document.getElementById('y').textContent = new Date().getFullYear();
+
+// موجة الصوت
+(function(){
+  var w=document.querySelector('.wave'),h=[8,16,26,14,30,20,10,24,32,18,12,28,16,22,10,26,34,14,20,8,24,30,12,18];
+  h.forEach(function(v){var b=document.createElement('b');b.style.height=v+'px';w.appendChild(b)});
+})();
+
+// مثال توضيحي: يظهر التقرير عند الضغط على زر التشغيل
+(function(){
+  var rows=[].slice.call(document.querySelectorAll('#rep .row')),btn=document.getElementById('play'),run=false;
+  var calm=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function reset(){rows.forEach(function(r){r.classList.remove('on')})}
+  function show(){
+    if(run)return;run=true;reset();btn.textContent='…';
+    rows.forEach(function(r,i){setTimeout(function(){r.classList.add('on');if(i===rows.length-1){run=false;btn.textContent='↺'}},calm?0:450*(i+1))});
+  }
+  btn.addEventListener('click',show);
+  rows.forEach(function(r){r.classList.add('on')});   // الحالة الأولى: كل الأسطر ظاهرة
+})();
+
+// نموذج الانضمام: يفتح واتساب برسالة جاهزة
+document.getElementById('f').addEventListener('submit',function(e){
+  e.preventDefault();
+  var g=function(id){return document.getElementById(id).value.trim()},st=document.getElementById('st');
+  if(!g('n')||!g('p')){st.textContent='اكتب الاسم ورقم الهاتف أولًا.';return}
+  var msg='السلام عليكم، أريد التسجيل في قائمة انتظار ChantierZone DZ.\nالاسم: '+g('n')+'\nالهاتف: '+g('p')+'\nالصفة: '+g('r')+'\nالولاية: '+(g('w')||'-')+'\nعدد الورشات النشطة: '+(g('s')||'-');
+  if(WHATSAPP==="213000000000"){st.textContent='لم يتم ضبط رقم واتساب في الموقع بعد. (صاحب الموقع: عدّل المتغير WHATSAPP في آخر الملف.)';return}
+  st.textContent='جارٍ فتح واتساب…';
+  window.open('https://wa.me/'+WHATSAPP+'?text='+encodeURIComponent(msg),'_blank','noopener');
+});
+</script>
+</body>
+</html>
